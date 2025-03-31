@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace _Game.Scripts.Game
@@ -6,6 +7,7 @@ namespace _Game.Scripts.Game
     {
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject uiaModel;
+        [SerializeField] private Rigidbody uiaRigidbody;
 
         private float _speed = 5f;
 
@@ -38,6 +40,20 @@ namespace _Game.Scripts.Game
             {
                 animator.SetBool("isSpin", false);
             }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Car"))
+            {
+                Debug.Log("HITTED BY CAR");
+                HitByCar();
+            }
+        }
+
+        public void HitByCar()
+        {
+            animator.SetBool("isDead", false);
         }
     }
 }
